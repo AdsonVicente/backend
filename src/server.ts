@@ -14,6 +14,10 @@ app.use(cors())
 
 app.use(router);
 
+app.get('/', (req, res) => {
+    res.send('Olá, mundo!');
+  });
+  
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')));
 
 //Conteudo detalhes por Id

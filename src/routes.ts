@@ -11,7 +11,6 @@ import { ListCategoryController } from './controllers/categoria/ListCategoryCont
 
 import { CreateConteudoController } from './controllers/conteudo/CreateConteudoController';
 import { ListByCategoryController } from './controllers/conteudo/ListByCategoryController';
-import { RemoveConteudoController } from './controllers/conteudo/RemoveConteudoController';
 import { ListByConteudoController } from './controllers/conteudo/ListByConteudoController';
 
 import { CreateInscricaoController } from './controllers/inscricao/CreateInscricaoController';
@@ -26,6 +25,8 @@ import { ListInscricaoController } from './controllers/inscricao/ListInscricaoCo
 import { ListAdminController } from './controllers/admin/ListAdminController';
 import { ListByEventoController } from './controllers/evento/ListByEventoController';
 import { EditConteudoController } from './controllers/conteudo/EditConteudoController';
+import { CreateLiturgiaController } from './controllers/liturgia/CreateLiturgiaController';
+import { ListLiturgiaDiariaController } from './controllers/liturgia/ListLiturgiaController';
 
 
 const router = Router();
@@ -55,10 +56,6 @@ router.get('/conteudo', new ListByConteudoController().handle)
 
 router.patch('/conteudo/editar/:id', isAuthenticated, new EditConteudoController().handleEdit);
 
-
-//Rotas Delete/conteudo
-// router.delete('/conteudo/:id', isAuthenticated, new RemoveConteudoController().handle)
-
 //Rotas Inscições
 router.post('/inscricao', new CreateInscricaoController().handle)
 
@@ -66,9 +63,14 @@ router.get('/inscricao', isAuthenticated, new ListInscricaoController().handle)
 
 
 //Rotas Eventos
-router.post('/evento', isAuthenticated, upload.single('file'), new CreateEventController().handle)
+router.post('/evento', upload.single('file'), new CreateEventController().handle)
 
 router.get('/evento', new ListByEventoController().handle)
+
+//Rota Liturgia
+router.post('/liturgia', isAuthenticated, new CreateLiturgiaController().handle)
+
+router.get('/liturgia', new ListLiturgiaDiariaController().handle)
 
 
 

@@ -47,6 +47,7 @@ model Conteudo {
   atualizadoEm DateTime  @updatedAt
   categoriaId  String // Alterado para String
   categoria    Categoria @relation(fields: [categoriaId], references: [id], name: "CategoriaConteudos")
+  viewCount    Int       @default(0)
 }
 
 model Event {
@@ -76,4 +77,16 @@ model Registration {
   event Event @relation(fields: [eventId], references: [id], name: "EventRegistrations")
 
   @@map("Registrations")
+}
+
+model LeituraDiaria {
+  id Int @id @default(autoincrement())
+
+  data              DateTime @default(now())
+  titulo            String
+  corLiturgica      String
+  primeiraLeitura   String
+  salmoResponsorial String
+  segundaLeitura    String?
+  evangelho         String
 }

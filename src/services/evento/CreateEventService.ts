@@ -23,4 +23,4 @@ class CreateEventService {
     }
 }
 
-export {CreateEventService}
+export { CreateEventService }
