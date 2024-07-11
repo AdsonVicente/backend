@@ -1,0 +1,7 @@
+services:
+  web:
+    port: 8080
+    buildCommand: npm run build
+    runCommand: npm start
+    env:
+      PORT: 8080
