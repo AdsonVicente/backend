@@ -1,15 +1,24 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 import { ListLiturgiaDiariaServices } from '../../services/liturgia/ListLiturgiaServices';
-
 
 class ListLiturgiaDiariaController {
     async handle(req: Request, res: Response) {
+      
+        const { date } = req.query;
+
+        
+        if (!date || isNaN(Date.parse(date as string))) {
+            return res.status(400).json({ error: 'Invalid or missing date parameter' });
+        }
 
         const listLiturgiaDiaria = new ListLiturgiaDiariaServices();
 
-        const liturgia = await listLiturgiaDiaria.execute();
+        
+        const liturgiaDate = new Date(date as string);
 
-        return res.json(liturgia)
+        const liturgia = await listLiturgiaDiaria.execute(liturgiaDate);
+
+        return res.json(liturgia);
     }
 }
 

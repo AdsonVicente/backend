@@ -1,22 +1,25 @@
 import { Request, Response } from 'express';
-import { EditConteudoService } from '../../services/Conteudo/EditConteudoService';
+import { EditarConteudoService } from '../../services/Conteudo/EditConteudoService';
 
 class EditConteudoController {
     async handleEdit(req: Request, res: Response) {
         const { id } = req.params;
-        const { novoTitulo, novoCorpo } = req.body;
+        const { titulo, corpo, autor, banner, categoriaId } = req.body;
 
-        if (!novoTitulo || !novoCorpo) {
-            return res.status(400).json({ error: 'Campos obrigatórios não foram fornecidos' });
+        if (!titulo && !corpo && !autor && !banner && !categoriaId) {
+            return res.status(400).json({ error: 'Nenhum campo para atualização foi fornecido' });
         }
 
-        const editConteudoService = new EditConteudoService();
+        const editConteudoService = new EditarConteudoService();
 
         try {
             const conteudoAtualizado = await editConteudoService.execute({
                 conteudo_id: id,
-                novoTitulo,
-                novoCorpo,
+                titulo,
+                corpo,
+                autor,
+                banner,
+                categoriaId,
             });
 
             return res.status(200).json(conteudoAtualizado);

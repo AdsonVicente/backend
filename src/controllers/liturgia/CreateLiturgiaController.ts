@@ -3,12 +3,12 @@ import { CreateLiturgiaService } from '../../services/liturgia/CreateLiturgiaSer
 
 class CreateLiturgiaController {
     async handle(req: Request, res: Response) {
-        const { primeiraLeitura, segundaLeitura, salmoResponsorial, titulo, evangelho, corLiturgica } = req.body;
+        const { primeiraLeitura, segundaLeitura, salmoResponsorial, titulo, evangelho, corLiturgica,dia } = req.body;
 
         const createAdminService = new CreateLiturgiaService();
 
         const user = await createAdminService.execute({
-            primeiraLeitura, segundaLeitura, salmoResponsorial, titulo, evangelho, corLiturgica
+            primeiraLeitura, segundaLeitura, salmoResponsorial, titulo, evangelho, corLiturgica,dia
         });
 
 

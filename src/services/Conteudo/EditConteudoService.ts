@@ -1,26 +1,31 @@
 import prismaClient from "../../prisma";
 
-interface ConteudoEditRequest {
+interface ConteudoUpdateRequest {
     conteudo_id: string;
-    novoTitulo: string;
-    novoCorpo: string;
+    titulo?: string;
+    corpo?: string;
+    autor?: string;
+    banner?: string;
+    categoriaId?: string;
 }
 
-class EditConteudoService {
-    async execute({ conteudo_id, novoTitulo, novoCorpo }: ConteudoEditRequest) {
-        const conteudoAtualizado = await prismaClient.conteudo.update({
+class EditarConteudoService {
+    async execute({ conteudo_id, titulo, corpo, autor, banner, categoriaId }: ConteudoUpdateRequest) {
+        const conteudo = await prismaClient.conteudo.update({
             where: {
                 id: conteudo_id,
             },
             data: {
-                titulo: novoTitulo,
-                corpo: novoCorpo,
-
+                titulo,
+                corpo,
+                autor,
+                banner,
+                categoriaId,
             },
         });
 
-        return conteudoAtualizado;
+        return conteudo;
     }
 }
 
-export { EditConteudoService };
+export { EditarConteudoService };

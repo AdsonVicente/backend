@@ -82,6 +82,7 @@ model Registration {
 model LeituraDiaria {
   id                Int      @id @default(autoincrement())
   data              DateTime @default(now())
+  dia               DateTime
   titulo            String
   corLiturgica      String
   primeiraLeitura   String
